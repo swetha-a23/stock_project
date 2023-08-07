@@ -1,0 +1,54 @@
+type Consumer {
+  id: Int!
+  name: String!
+  email: String!
+  orders: [Orders!]
+}
+
+type Supplier {
+  id: Int!
+  name: String!
+  email: String!
+  products: [Product!]
+}
+
+type Product {
+  id: Int!
+  name: String!
+  price: Float!
+  supplier: Supplier!
+}
+
+type Orders {
+  id: Int!
+  quantity: Int!
+  consumer: Consumer!
+  supplier: Supplier!
+  product: Product!
+}
+
+type Query {
+  getConsumer(consumerId: Int!): Consumer
+  getAllConsumers: [Consumer]
+  getSupplier(supplierId: Int!): Supplier
+  getAllSuppliers: [Supplier]
+  getProduct(productId: Int!): Product
+  getAllProducts: [Product]
+  getOrder(orderId: Int!): Orders
+  getAllOrders: [Orders]
+}
+
+type Mutation {
+  createConsumer(name: String!, email: String!): Consumer
+  updateConsumer(consumerId: Int!, name: String!, email: String!): Consumer
+  deleteConsumer(consumerId: Int!): Consumer
+  createSupplier(name: String!, email: String!): Supplier
+  updateSupplier(supplierId: Int!, name: String!, email: String!): Supplier
+  deleteSupplier(supplierId: Int!): Supplier
+  createProduct(name: String!, price: Float!, supplierId: Int!): Product
+  updateProduct(productId: Int!, name: String!, price: Float!, supplierId: Int!): Product
+  deleteProduct(productId: Int!): Product
+  createOrder(quantity: Int!, consumerId: Int!, supplierId: Int!, productId: Int!): Orders
+  updateOrder(orderId: Int!, quantity: Int!, consumerId: Int!,supplierId: Int!, productId: Int!): Orders
+  deleteOrder(orderId: Int!): Orders
+}
